@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "658572402049",
+    "project_id": "spots-640a8",
+    "storage_bucket": "spots-640a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658572402049:android:6b19c671ca1ed641cb5c80",
+        "android_client_info": {
+          "package_name": "com.example.placesexam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPtncEdHzyL4x35pjgCvoVahPypWUzLks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658572402049:android:63304c1bb292f755cb5c80",
+        "android_client_info": {
+          "package_name": "com.example.spotsexam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPtncEdHzyL4x35pjgCvoVahPypWUzLks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
