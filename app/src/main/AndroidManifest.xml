@@ -4,8 +4,10 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -15,6 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlacesExam"
         tools:targetApi="31" >
+
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDvNReQqgHX3o7XYBOh6jfcQHClVfociN0"/>
 
 
         <activity

@@ -1,8 +1,4 @@
 package com.example.placesexam
-
-import android.Manifest.permission.READ_EXTERNAL_STORAGE
-import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,14 +8,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
-
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-
 import com.google.firebase.firestore.firestore
-import com.google.firebase.storage.FirebaseStorage
+
 
 class AddNewSpotFragment : Fragment() {
 
@@ -48,13 +40,18 @@ class AddNewSpotFragment : Fragment() {
             val lng = lngString.toDoubleOrNull()
 
             if (lat == null || lng == null) {
-                Toast.makeText(context, "Latitude and longitude must be valid numbers!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "Latitude and longitude must be valid numbers!",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
             val db = Firebase.firestore
             val userId = FirebaseAuth.getInstance().currentUser?.uid
-            val newPlaceRef = db.collection("users").document(userId!!).collection("places").document()
+            val newPlaceRef =
+                db.collection("users").document(userId!!).collection("places").document()
 
             val placeData = hashMapOf(
                 "name" to name,
