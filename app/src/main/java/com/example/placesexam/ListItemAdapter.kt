@@ -30,6 +30,16 @@ class ListItemAdapter(
             view.findViewById<TextView>(R.id.placeName).text = currentPlace.name
             view.findViewById<TextView>(R.id.placeDescription).text = currentPlace.description
 
+            val description = currentPlace.description
+            if (description != null) {
+                if(description.length > 35){
+                    val shortDescription = description.substring(0..34) + "..."
+                    view.findViewById<TextView>(R.id.placeDescription).text = shortDescription
+                }else{
+                    view.findViewById<TextView>(R.id.placeDescription).text = description
+                }
+            }
+
             Glide.with(view.context)
                 .load(currentPlace.imageUrl)
                 .into(view.findViewById(R.id.ivThumbnail))
@@ -40,7 +50,6 @@ class ListItemAdapter(
     }
 
     fun updateData(newData: List<ListItem>) {
-        val data = newData
         notifyDataSetChanged()
     }
 }

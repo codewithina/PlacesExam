@@ -101,11 +101,9 @@ class HomeFragment : Fragment() {
                     }
                 }
 
-                // Tilldela placeList till den globala places-listan
                 places.clear()
                 places.addAll(placeList)
 
-                // Uppdatera RecyclerView
                 updateRecyclerView()
             }
     }
