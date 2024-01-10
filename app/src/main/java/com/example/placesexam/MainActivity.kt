@@ -13,6 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentHolder, HomeFragment())
+            .commit()
+
        addNewSpot = findViewById(R.id.addNewSpot)
 
         addNewSpot.setOnClickListener{
@@ -20,7 +24,6 @@ class MainActivity : AppCompatActivity() {
             transaction.replace(R.id.fragmentHolder, AddNewSpotFragment())
             transaction.commit()
         }
-
 
         val navView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
 
@@ -47,7 +50,5 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
-
     }
 }

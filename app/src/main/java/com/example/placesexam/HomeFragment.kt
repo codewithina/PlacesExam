@@ -40,7 +40,6 @@ class HomeFragment : Fragment() {
             latitude = 51.5074,
             longitude = -0.1278
         ),
-        // ... Lägg till fler platser om det behövs
     )
 
     override fun onCreateView(
@@ -48,26 +47,26 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
-
-        // Hitta din RecyclerView i layouten
         val rvPlaces = rootView.findViewById<RecyclerView>(R.id.recyclerViewHome)
 
-        // Instansiera adaptern med din listdata och klicklyssnare
         adapter = ListItemAdapter(mockData) { clickedItem ->
-            // Implementera önskad åtgärd vid klick på listelementet
-            // Exempelvis: startActivity(Intent(requireContext(), TravelActivity::class.java).putExtra("id", clickedItem.id))
+            // When clicking the items, open fragment for places
         }
 
-        // Koppla adaptern till RecyclerView
+        // Adapter to the rv
         rvPlaces.adapter = adapter
 
-        // Instansiera en LinearLayoutManager för din RecyclerView
         val layoutManager = LinearLayoutManager(requireContext())
         rvPlaces.layoutManager = layoutManager
 
-        // Lägg till en DividerItemDecoration för att lägga till avstånd mellan listelement
+        // Space between list items
         rvPlaces.addItemDecoration(DividerItemDecoration(requireContext(), layoutManager.orientation))
 
         return rootView
     }
+
+
+
+
+
 }
