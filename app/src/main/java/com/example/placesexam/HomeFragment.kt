@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,30 +20,35 @@ private const val ARG_PARAM2 = "param2"
 class HomeFragment : Fragment() {
 
     private lateinit var adapter: ListItemAdapter
-    private val places = mutableListOf(ListItem())
+    private val places = mutableListOf<ListItem>()
     val mockData = listOf(
         ListItem(
-            id = 1,
+            id = "1",
             name = "Place A",
             description = "Description of Place A",
             latitude = 37.7749,
             longitude = -122.4194
         ),
         ListItem(
-            id = 2,
+            id = "2",
             name = "Place B",
             description = "Description of Place B",
             latitude = 40.7128,
             longitude = -74.0060
         ),
         ListItem(
-            id = 3,
+            id = "3",
             name = "Place C",
             description = "Description of Place C",
             latitude = 51.5074,
             longitude = -0.1278
         ),
     )
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getDataFirestore()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +57,7 @@ class HomeFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
         val rvPlaces = rootView.findViewById<RecyclerView>(R.id.recyclerViewHome)
 
-        adapter = ListItemAdapter(mockData) { clickedItem ->
+        adapter = ListItemAdapter(places) { clickedItem ->
             // When clicking the items, open fragment for places
         }
 
@@ -60,13 +68,51 @@ class HomeFragment : Fragment() {
         rvPlaces.layoutManager = layoutManager
 
         // Space between list items
-        rvPlaces.addItemDecoration(DividerItemDecoration(requireContext(), layoutManager.orientation))
+        rvPlaces.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                layoutManager.orientation
+            )
+        )
 
         return rootView
     }
 
+    fun getDataFirestore() {
+        val db = FirebaseFirestore.getInstance()
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
 
+        db.collection("users").document(userId!!)
+            .collection("places")
+            .get()
+            .addOnSuccessListener { result ->
+                val placeList = ArrayList<ListItem>()
 
+                for (document in result) {
+                    val name = document.getString("name")
+                    val description = document.getString("description")
+                    val lat = document.getDouble("lat")
+                    val lng = document.getDouble("lng")
+                    val imageUrl = document.getString("imageUrl")
+
+                    if (name != null && description != null && lat != null && lng != null && imageUrl != null) {
+                        val listItem = ListItem(userId, name, description, imageUrl, lat, lng)
+                        placeList.add(listItem)
+                    }
+                }
+
+                // Tilldela placeList till den globala places-listan
+                places.clear()
+                places.addAll(placeList)
+
+                // Uppdatera RecyclerView
+                updateRecyclerView()
+            }
+    }
+
+    private fun updateRecyclerView() {
+        adapter.updateData(places)
+    }
 
 
 }
