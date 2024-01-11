@@ -8,6 +8,6 @@ class ListItem (
     val name: String? = null,
     val description: String? = null,
     val imageUrl: String? = null,
-    val latitude: Double? = null,
-    val longitude: Double? = null
+    val lat: Double,
+    val lng: Double
 ) : Serializable

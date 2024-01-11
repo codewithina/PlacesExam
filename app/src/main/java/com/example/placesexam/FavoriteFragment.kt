@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -67,6 +68,7 @@ class FavoriteFragment : Fragment() {
     fun getMyDataFirestore() {
         val db = FirebaseFirestore.getInstance()
         val userId = FirebaseAuth.getInstance().currentUser?.uid
+        val viewModel = ViewModelProvider(requireActivity()).get(PlacesViewModel::class.java)
 
         db.collection("users").document(userId!!)
             .collection("places")
@@ -87,6 +89,7 @@ class FavoriteFragment : Fragment() {
                     }
                 }
 
+                viewModel.places.value = placeList
                 places.clear()
                 places.addAll(placeList)
 
@@ -97,5 +100,4 @@ class FavoriteFragment : Fragment() {
     private fun updateRecyclerView() {
         adapter.updateData(places)
     }
-
 }
