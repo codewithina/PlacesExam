@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class FavoriteFragment : Fragment() {
+class MyPlacesFragment : Fragment() {
 
     private lateinit var adapter: ListItemAdapter
     private val places = mutableListOf<ListItem>()
@@ -33,7 +33,7 @@ class FavoriteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val rootView = inflater.inflate(R.layout.fragment_favorite, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_my_places, container, false)
         val rvPlaces = rootView.findViewById<RecyclerView>(R.id.recyclerViewFav)
 
         adapter = ListItemAdapter(places) { clickedItem ->

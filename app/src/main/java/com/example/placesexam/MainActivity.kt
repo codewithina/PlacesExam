@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragmentHolder, HomeFragment())
+            .add(R.id.fragmentHolder, MyPlacesFragment())
             .commit()
 
        addNewSpot = findViewById(R.id.addNewSpot)
@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
 
+        navView.selectedItemId = R.id.myPlacesFragment
+
         navView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.homeFragment -> {
@@ -36,9 +38,9 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
-                R.id.favoriteFragment -> {
+                R.id.myPlacesFragment -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragmentHolder, FavoriteFragment())
+                        .replace(R.id.fragmentHolder, MyPlacesFragment())
                         .commit()
                     true
                 }

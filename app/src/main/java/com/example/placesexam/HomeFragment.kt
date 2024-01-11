@@ -60,8 +60,7 @@ class HomeFragment : Fragment() {
     fun getDataFirestore() {
         val db = FirebaseFirestore.getInstance()
         val userId = FirebaseAuth.getInstance().currentUser?.uid
-
-        // db.collection(places) for all places
+        
         db.collection("places")
             .get()
             .addOnSuccessListener { result ->
