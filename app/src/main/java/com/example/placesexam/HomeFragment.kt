@@ -58,7 +58,14 @@ class HomeFragment : Fragment() {
         val rvPlaces = rootView.findViewById<RecyclerView>(R.id.recyclerViewHome)
 
         adapter = ListItemAdapter(places) { clickedItem ->
-            // When clicking the items, open fragment for places
+            val placeInfo = PlaceInfoFragment()
+            val bundle = Bundle()
+            bundle.putSerializable("clickedItemKey", clickedItem)
+            placeInfo.arguments = bundle
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragmentHolder, placeInfo)
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
 
         // Adapter to the rv
