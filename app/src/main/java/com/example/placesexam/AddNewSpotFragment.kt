@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -99,18 +100,22 @@ class AddNewSpotFragment : Fragment() {
     private fun saveDataToFirestore(imageUrl: String) {
         val db = FirebaseFirestore.getInstance()
         val userId = FirebaseAuth.getInstance().currentUser?.uid
-        val newPlaceRef =
-            db.collection("users").document(userId!!).collection("places").document()
+        val newPlaceRefUser = db.collection("users").document(userId!!).collection("places").document()
+        val newPlaceRefGeneral = db.collection("places").document()
 
         val placeData = hashMapOf(
             "name" to name,
             "description" to description,
             "lat" to lat,
             "lng" to lng,
-            "imageUrl" to imageUrl
+            "imageUrl" to imageUrl,
+            "userId" to userId
         )
 
-        newPlaceRef.set(placeData)
+        val userTask = newPlaceRefUser.set(placeData)
+        val generalTask = newPlaceRefGeneral.set(placeData)
+
+        Tasks.whenAllSuccess<Void>(userTask, generalTask)
             .addOnSuccessListener {
                 Toast.makeText(context, "Place data added successfully!", Toast.LENGTH_SHORT).show()
                 requireActivity().supportFragmentManager.popBackStack()

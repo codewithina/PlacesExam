@@ -12,38 +12,10 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class HomeFragment : Fragment() {
 
     private lateinit var adapter: ListItemAdapter
     private val places = mutableListOf<ListItem>()
-    val mockData = listOf(
-        ListItem(
-            id = "1",
-            name = "Place A",
-            description = "Description of Place A",
-            latitude = 37.7749,
-            longitude = -122.4194
-        ),
-        ListItem(
-            id = "2",
-            name = "Place B",
-            description = "Description of Place B",
-            latitude = 40.7128,
-            longitude = -74.0060
-        ),
-        ListItem(
-            id = "3",
-            name = "Place C",
-            description = "Description of Place C",
-            latitude = 51.5074,
-            longitude = -0.1278
-        ),
-    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -89,8 +61,8 @@ class HomeFragment : Fragment() {
         val db = FirebaseFirestore.getInstance()
         val userId = FirebaseAuth.getInstance().currentUser?.uid
 
-        db.collection("users").document(userId!!)
-            .collection("places")
+        // db.collection(places) for all places
+        db.collection("places")
             .get()
             .addOnSuccessListener { result ->
                 val placeList = ArrayList<ListItem>()
