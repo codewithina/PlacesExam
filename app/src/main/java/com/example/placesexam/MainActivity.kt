@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentHolder, HomeFragment())
+            .add(R.id.fragmentHolder, HomeFragment())
             .commit()
 
        addNewSpot = findViewById(R.id.addNewSpot)
@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         addNewSpot.setOnClickListener{
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentHolder, AddNewSpotFragment())
+            transaction.addToBackStack(null)
             transaction.commit()
         }
 

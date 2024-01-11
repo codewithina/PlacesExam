@@ -113,7 +113,7 @@ class AddNewSpotFragment : Fragment() {
         newPlaceRef.set(placeData)
             .addOnSuccessListener {
                 Toast.makeText(context, "Place data added successfully!", Toast.LENGTH_SHORT).show()
-                requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+                requireActivity().supportFragmentManager.popBackStack()
             }
             .addOnFailureListener { e ->
                 Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()

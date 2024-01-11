@@ -5,7 +5,7 @@
         android:title="Home"
         android:icon="@drawable/baseline_home_24"/>
     <item android:id="@+id/favoriteFragment"
-        android:title="Favorites"
+        android:title="My Places"
         android:icon="@drawable/baseline_favorite_24"/>
     <item android:id="@+id/mapFragment"
         android:title="Map"
