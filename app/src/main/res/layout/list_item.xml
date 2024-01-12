@@ -8,9 +8,6 @@
     card_view:cardCornerRadius="10dp"
     android:layout_margin="12dp">
 
-    <!-- Resten av din layout för listobjektet här -->
-
-
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

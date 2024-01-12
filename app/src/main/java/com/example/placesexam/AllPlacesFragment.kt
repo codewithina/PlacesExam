@@ -5,11 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AllPlacesFragment : Fragment() {
@@ -49,16 +46,16 @@ class AllPlacesFragment : Fragment() {
         return rootView
     }
 
-    fun getDataFirestore() {
+    private fun getDataFirestore() {
         val db = FirebaseFirestore.getInstance()
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
-        
+
         db.collection("places")
             .get()
             .addOnSuccessListener { result ->
                 val placeList = ArrayList<ListItem>()
 
                 for (document in result) {
+                    val userId = document.getString("userId")
                     val name = document.getString("name")
                     val description = document.getString("description")
                     val lat = document.getDouble("lat")

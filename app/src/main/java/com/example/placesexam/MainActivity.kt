@@ -7,7 +7,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var addNewSpot: FloatingActionButton
+    private lateinit var fab: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,9 +17,9 @@ class MainActivity : AppCompatActivity() {
             .add(R.id.fragmentHolder, MyPlacesFragment())
             .commit()
 
-       addNewSpot = findViewById(R.id.addNewSpot)
+       fab = findViewById(R.id.fab)
 
-        addNewSpot.setOnClickListener{
+        fab.setOnClickListener{
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentHolder, AddNewSpotFragment())
             transaction.addToBackStack(null)

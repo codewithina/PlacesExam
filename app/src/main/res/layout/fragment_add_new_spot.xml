@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AddNewSpotFragment">
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="10dp"
+    android:layout_margin="24dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="50dp">
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginVertical="8dp">
 
         <TextView
             android:id="@+id/textViewAddNew"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add new place!"
-            android:textSize="34sp" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Add your perfect spot!"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
 
         <EditText
             android:id="@+id/editTextName"
@@ -26,7 +32,8 @@
             android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="Name"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
         <EditText
             android:id="@+id/editTextDescription"
@@ -35,7 +42,8 @@
             android:layout_below="@+id/editTextName"
             android:ems="10"
             android:hint="Description"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
         <EditText
             android:id="@+id/editTextLat"
@@ -44,7 +52,8 @@
             android:layout_below="@+id/editTextDescription"
             android:ems="10"
             android:hint="Latitude"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
         <EditText
             android:id="@+id/editTextLng"
@@ -53,14 +62,15 @@
             android:layout_below="@+id/editTextLat"
             android:ems="10"
             android:hint="Longitude"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
         <Button
             android:id="@+id/buttonAdd"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:text="Save" />
 
         <ImageView
@@ -68,20 +78,24 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_below="@+id/editTextLng"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:src="@drawable/baseline_image_24" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tvAddImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/addImage"
+            android:layout_below="@+id/editTextLng"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:text="Add image:"
-            android:textSize="20sp" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
     </RelativeLayout>
 
-</FrameLayout>
+</androidx.cardview.widget.CardView>

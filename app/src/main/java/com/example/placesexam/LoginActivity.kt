@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun signUp(){
+    private fun signUp(){
 
         val user = email.text.toString()
         val password = password.text.toString()
@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
             return
         }
         auth.createUserWithEmailAndPassword(user, password)
-            .addOnCompleteListener() { task ->
+            .addOnCompleteListener { task ->
                 if(task.isSuccessful) {
                     Log.d("!!!", "Registrerad")
                     startMainActivity()
@@ -53,14 +53,14 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    fun signIn() {
+    private fun signIn() {
         val user = email.text.toString()
         val password = password.text.toString()
         if (user.isEmpty() || password.isEmpty()) {
             return
         }
         auth.signInWithEmailAndPassword(user, password)
-            .addOnCompleteListener() { task ->
+            .addOnCompleteListener { task ->
                 if(task.isSuccessful) {
                     Log.d("!!!", "Inloggad")
                     startMainActivity()
@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    fun startMainActivity() {
+    private fun startMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
@@ -83,6 +83,9 @@ class LoginActivity : AppCompatActivity() {
         updateUI(currentUser)
     }
 
-    fun updateUI(user: FirebaseUser?) {
+    private fun updateUI(user: FirebaseUser?) {
+        if (user != null) {
+            startMainActivity()
+        }
     }
 }

@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import com.google.android.gms.tasks.Tasks
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -34,10 +35,14 @@ class AddNewSpotFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_add_new_spot, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val fab: FloatingActionButton = activity?.findViewById(R.id.fab) as FloatingActionButton
+        fab.visibility = View.GONE
 
         val saveButton: Button = view.findViewById(R.id.buttonAdd)
         image = view.findViewById(R.id.addImage)
@@ -65,6 +70,11 @@ class AddNewSpotFragment : Fragment() {
 
             uploadImageToFirebaseStorage()
         }
+    }
+    override fun onPause() {
+        super.onPause()
+        val fab: FloatingActionButton = activity?.findViewById(R.id.fab) as FloatingActionButton
+        fab.visibility = View.VISIBLE
     }
 
     private fun openGallery() {

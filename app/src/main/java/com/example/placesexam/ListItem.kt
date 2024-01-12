@@ -1,10 +1,9 @@
 package com.example.placesexam
 
-import android.widget.ImageView
 import java.io.Serializable
 
 class ListItem (
-    val id: String? = null,
+    val userId: String? = null,
     val name: String? = null,
     val description: String? = null,
     val imageUrl: String? = null,
