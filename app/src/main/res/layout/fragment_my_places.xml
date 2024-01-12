@@ -6,7 +6,7 @@
     tools:context=".MyPlacesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewFav"
+        android:id="@+id/rvMyPlaces"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

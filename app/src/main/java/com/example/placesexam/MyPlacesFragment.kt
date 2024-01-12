@@ -34,7 +34,7 @@ class MyPlacesFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_my_places, container, false)
-        val rvPlaces = rootView.findViewById<RecyclerView>(R.id.recyclerViewFav)
+        val rvPlaces = rootView.findViewById<RecyclerView>(R.id.rvMyPlaces)
 
         adapter = ListItemAdapter(places) { clickedItem ->
             val placeInfo = PlaceInfoFragment()
@@ -52,14 +52,6 @@ class MyPlacesFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(requireContext())
         rvPlaces.layoutManager = layoutManager
-
-        // Space between list items
-        rvPlaces.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                layoutManager.orientation
-            )
-        )
 
         return rootView
 

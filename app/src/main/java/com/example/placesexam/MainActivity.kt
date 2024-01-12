@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.homeFragment -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragmentHolder, HomeFragment())
+                        .replace(R.id.fragmentHolder, AllPlacesFragment())
                         .commit()
                     true
                 }

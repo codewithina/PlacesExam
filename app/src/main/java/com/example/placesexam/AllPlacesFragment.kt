@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class HomeFragment : Fragment() {
+class AllPlacesFragment : Fragment() {
 
     private lateinit var adapter: ListItemAdapter
     private val places = mutableListOf<ListItem>()
@@ -26,8 +26,8 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_home, container, false)
-        val rvPlaces = rootView.findViewById<RecyclerView>(R.id.recyclerViewHome)
+        val rootView = inflater.inflate(R.layout.fragment_all_places, container, false)
+        val rvPlaces = rootView.findViewById<RecyclerView>(R.id.rvAllPlaces)
 
         adapter = ListItemAdapter(places) { clickedItem ->
             val placeInfo = PlaceInfoFragment()
@@ -43,16 +43,8 @@ class HomeFragment : Fragment() {
         // Adapter to the rv
         rvPlaces.adapter = adapter
 
-        val layoutManager = LinearLayoutManager(requireContext())
+        val layoutManager = GridLayoutManager(requireContext(), 2)
         rvPlaces.layoutManager = layoutManager
-
-        // Space between list items
-        rvPlaces.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                layoutManager.orientation
-            )
-        )
 
         return rootView
     }

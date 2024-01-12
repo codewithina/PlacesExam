@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:orientation="vertical"
-    android:padding="8dp">
+    card_view:cardCornerRadius="10dp"
+    android:layout_margin="12dp">
+
+    <!-- Resten av din layout för listobjektet här -->
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/ivThumbnail"
@@ -18,12 +28,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Soko soko"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="4dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
 
     <TextView
         android:id="@+id/placeDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginBottom="4dp"
         android:text="Visit this perfect spot in Koh Phangan."
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 </LinearLayout>
+
+</androidx.cardview.widget.CardView>
