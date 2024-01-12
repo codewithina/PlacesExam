@@ -62,4 +62,17 @@ class PlaceInfoFragment : Fragment() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab)
+        fab.setImageResource(R.drawable.baseline_add_24) // Byt ut till din "lägg till"-ikon
+        fab.setOnClickListener{
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragmentHolder, AddNewSpotFragment())
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+    }
+
 }
