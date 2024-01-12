@@ -55,6 +55,7 @@ class AllPlacesFragment : Fragment() {
                 val placeList = ArrayList<ListItem>()
 
                 for (document in result) {
+                    val placeId = document.id
                     val userId = document.getString("userId")
                     val name = document.getString("name")
                     val description = document.getString("description")
@@ -63,7 +64,7 @@ class AllPlacesFragment : Fragment() {
                     val imageUrl = document.getString("imageUrl")
 
                     if (name != null && description != null && lat != null && lng != null && imageUrl != null) {
-                        val listItem = ListItem(userId, name, description, imageUrl, lat, lng)
+                        val listItem = ListItem(userId, placeId, name, description, imageUrl, lat, lng)
                         placeList.add(listItem)
                     }
                 }

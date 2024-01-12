@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import java.util.UUID
 
 class AddNewSpotFragment : Fragment() {
 
@@ -110,8 +111,11 @@ class AddNewSpotFragment : Fragment() {
     private fun saveDataToFirestore(imageUrl: String) {
         val db = FirebaseFirestore.getInstance()
         val userId = FirebaseAuth.getInstance().currentUser?.uid
-        val newPlaceRefUser = db.collection("users").document(userId!!).collection("places").document()
-        val newPlaceRefGeneral = db.collection("places").document()
+
+        val uniqueId = UUID.randomUUID().toString()
+
+        val newPlaceRefUser = db.collection("users").document(userId!!).collection("places").document(uniqueId)
+        val newPlaceRefGeneral = db.collection("places").document(uniqueId)
 
         val placeData = hashMapOf(
             "name" to name,

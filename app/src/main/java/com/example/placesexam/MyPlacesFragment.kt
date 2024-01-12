@@ -32,7 +32,6 @@ class MyPlacesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_my_places, container, false)
         val rvPlaces = rootView.findViewById<RecyclerView>(R.id.rvMyPlaces)
 
@@ -69,6 +68,7 @@ class MyPlacesFragment : Fragment() {
                 val placeList = ArrayList<ListItem>()
 
                 for (document in result) {
+                    val placeId = document.id
                     val name = document.getString("name")
                     val description = document.getString("description")
                     val lat = document.getDouble("lat")
@@ -76,10 +76,11 @@ class MyPlacesFragment : Fragment() {
                     val imageUrl = document.getString("imageUrl")
 
                     if (name != null && description != null && lat != null && lng != null && imageUrl != null) {
-                        val listItem = ListItem(userId, name, description, imageUrl, lat, lng)
+                        val listItem = ListItem(userId, placeId, name, description, imageUrl, lat, lng)
                         placeList.add(listItem)
                     }
                 }
+
 
                 viewModel.places.value = placeList
                 places.clear()

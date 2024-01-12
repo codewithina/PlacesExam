@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class PlaceInfoFragment : Fragment() {
 
@@ -48,14 +49,15 @@ class PlaceInfoFragment : Fragment() {
 
             val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
 
-            Log.d("MyDebugTag", "clickedItem userId: ${clickedItem?.userId}, currentUserId: $currentUserId")
-
             if (clickedItem?.userId == currentUserId) {
                 val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab)
                 fab.setImageResource(R.drawable.baseline_delete_outline_24)
                 fab.setOnClickListener {
-                    // deletePlace(clickedItem.userId)
-                    Toast.makeText(view.context, "hejhej ", Toast.LENGTH_SHORT).show()
+                    if (currentUserId != null && clickedItem?.placeId != null) {
+                        deletePlace(currentUserId, clickedItem.placeId!!)
+                    } else {
+                        Toast.makeText(context, "Error: Place does not have an id", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -73,6 +75,31 @@ class PlaceInfoFragment : Fragment() {
             transaction.addToBackStack(null)
             transaction.commit()
         }
+    }
+
+    fun deletePlace(userId: String, placeId: String) {
+        val db = FirebaseFirestore.getInstance()
+
+        // Delete from "users" -> "userId" -> "places"-collection
+        db.collection("users").document(userId)
+            .collection("places").document(placeId)
+            .delete()
+            .addOnSuccessListener {
+                Log.d("Firestore", "Document successfully deleted!")
+            }
+            .addOnFailureListener { e ->
+                Log.w("Firestore", "Error deleting document", e)
+            }
+
+        // Delete from "places"-collection
+        db.collection("places").document(placeId)
+            .delete()
+            .addOnSuccessListener {
+                Log.d("Firestore", "Document successfully deleted!")
+            }
+            .addOnFailureListener { e ->
+                Log.w("Firestore", "Error deleting document", e)
+            }
     }
 
 }
