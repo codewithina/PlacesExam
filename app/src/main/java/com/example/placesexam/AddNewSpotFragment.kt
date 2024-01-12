@@ -30,6 +30,7 @@ class AddNewSpotFragment : Fragment() {
     private lateinit var description: String
     private var lat: Double? = null
     private var lng: Double? = null
+    var imageSelected = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +48,7 @@ class AddNewSpotFragment : Fragment() {
 
         val saveButton: Button = view.findViewById(R.id.buttonAdd)
         image = view.findViewById(R.id.addImage)
+
 
         image.setOnClickListener {
             openGallery()
@@ -69,6 +71,15 @@ class AddNewSpotFragment : Fragment() {
                 return@setOnClickListener
             }
 
+            if (!imageSelected) {
+                Toast.makeText(
+                    context,
+                    "Please select an image!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
             uploadImageToFirebaseStorage()
         }
     }
@@ -81,6 +92,7 @@ class AddNewSpotFragment : Fragment() {
     private fun openGallery() {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -89,6 +101,7 @@ class AddNewSpotFragment : Fragment() {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
             selectedImageUri = data.data!!
             image.setImageURI(selectedImageUri)
+            imageSelected = true
         }
     }
 

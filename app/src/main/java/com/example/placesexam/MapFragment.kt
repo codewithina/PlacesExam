@@ -10,6 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class MapFragment : Fragment() {
@@ -59,6 +60,18 @@ class MapFragment : Fragment() {
                 transaction.addToBackStack(null)
                 transaction.commit()
             }
+        }
+    }
+    override fun onResume() {
+        super.onResume()
+
+        val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab)
+        fab.setImageResource(R.drawable.baseline_add_24)
+        fab.setOnClickListener{
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragmentHolder, AddNewSpotFragment())
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
     }
 }

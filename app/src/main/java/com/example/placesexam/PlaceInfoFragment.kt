@@ -25,9 +25,7 @@ class PlaceInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_place_info, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,6 +53,7 @@ class PlaceInfoFragment : Fragment() {
                 fab.setOnClickListener {
                     if (currentUserId != null && clickedItem?.placeId != null) {
                         deletePlace(currentUserId, clickedItem.placeId!!)
+                        parentFragmentManager.popBackStack()
                     } else {
                         Toast.makeText(context, "Error: Place does not have an id", Toast.LENGTH_SHORT).show()
                     }
@@ -62,19 +61,6 @@ class PlaceInfoFragment : Fragment() {
             }
         }
 
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab)
-        fab.setImageResource(R.drawable.baseline_add_24) // Byt ut till din "lägg till"-ikon
-        fab.setOnClickListener{
-            val transaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragmentHolder, AddNewSpotFragment())
-            transaction.addToBackStack(null)
-            transaction.commit()
-        }
     }
 
     fun deletePlace(userId: String, placeId: String) {

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AllPlacesFragment : Fragment() {
@@ -44,6 +45,19 @@ class AllPlacesFragment : Fragment() {
         rvPlaces.layoutManager = layoutManager
 
         return rootView
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab)
+        fab.setImageResource(R.drawable.baseline_add_24)
+        fab.setOnClickListener{
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragmentHolder, AddNewSpotFragment())
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
     }
 
     private fun getDataFirestore() {
