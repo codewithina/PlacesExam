@@ -53,7 +53,10 @@ class MapFragment : Fragment() {
             googleMap.setOnInfoWindowClickListener { clickedMarker ->
                 val placeInfo = PlaceInfoFragment()
                 val bundle = Bundle()
-                bundle.putSerializable("clickedItemKey", clickedMarker.tag as ListItem) // antar att titeln är din nyckel
+                bundle.putSerializable(
+                    "clickedItemKey",
+                    clickedMarker.tag as ListItem
+                ) // antar att titeln är din nyckel
                 placeInfo.arguments = bundle
                 val transaction = requireActivity().supportFragmentManager.beginTransaction()
                 transaction.replace(R.id.fragmentHolder, placeInfo)
@@ -62,12 +65,13 @@ class MapFragment : Fragment() {
             }
         }
     }
+
     override fun onResume() {
         super.onResume()
 
         val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab)
         fab.setImageResource(R.drawable.baseline_add_24)
-        fab.setOnClickListener{
+        fab.setOnClickListener {
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentHolder, AddNewSpotFragment())
             transaction.addToBackStack(null)

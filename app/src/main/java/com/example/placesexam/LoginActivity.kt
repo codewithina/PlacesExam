@@ -6,15 +6,16 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 
 class LoginActivity : AppCompatActivity() {
-    private lateinit var auth : FirebaseAuth
-    private lateinit var email : EditText
-    private lateinit var password : EditText
+    private lateinit var auth: FirebaseAuth
+    private lateinit var email: EditText
+    private lateinit var password: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,21 +35,34 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun signUp(){
+    private fun signUp() {
 
         val user = email.text.toString()
         val password = password.text.toString()
 
         if (user.isEmpty() || password.isEmpty()) {
+            Toast.makeText(
+                this,
+                "Registration not successful, try again.",
+                Toast.LENGTH_SHORT
+            ).show()
             return
         }
         auth.createUserWithEmailAndPassword(user, password)
             .addOnCompleteListener { task ->
-                if(task.isSuccessful) {
-                    Log.d("!!!", "Registrerad")
+                if (task.isSuccessful) {
+                    Toast.makeText(
+                        this,
+                        "Registration successful.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     startMainActivity()
                 } else {
-                    Log.d("!!!", "Inte registrerad")
+                    Toast.makeText(
+                        this,
+                        "Registration not successful, try again.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
@@ -57,15 +71,23 @@ class LoginActivity : AppCompatActivity() {
         val user = email.text.toString()
         val password = password.text.toString()
         if (user.isEmpty() || password.isEmpty()) {
+            Toast.makeText(
+                this,
+                "Log in not successful, try again.",
+                Toast.LENGTH_SHORT
+            ).show()
             return
         }
         auth.signInWithEmailAndPassword(user, password)
             .addOnCompleteListener { task ->
-                if(task.isSuccessful) {
-                    Log.d("!!!", "Inloggad")
+                if (task.isSuccessful) {
                     startMainActivity()
                 } else {
-                    Log.d("!!!", "Inte inloggad")
+                    Toast.makeText(
+                        this,
+                        "Log in not successful, try again.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
@@ -74,8 +96,7 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
-
-    //TODO: If user already signed in
+    
 
     override fun onStart() {
         super.onStart()
@@ -84,8 +105,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun updateUI(user: FirebaseUser?) {
-        if (user != null) {
-            startMainActivity()
-        }
+
+//TODO: Open up if you want to skip login if already logged in one time
+
+//        if (user != null) {
+//            startMainActivity()
+//        }
+        
     }
 }

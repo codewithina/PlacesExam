@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
@@ -59,7 +58,11 @@ class PlaceInfoFragment : Fragment() {
                         deletePlace(currentUserId, clickedItem.placeId!!)
                         parentFragmentManager.popBackStack()
                     } else {
-                        Toast.makeText(context, "Error: Place does not have an id", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            "Error: Place does not have an id",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -77,7 +80,7 @@ class PlaceInfoFragment : Fragment() {
 
     }
 
-    fun deletePlace(userId: String, placeId: String) {
+    private fun deletePlace(userId: String, placeId: String) {
         val db = FirebaseFirestore.getInstance()
 
         // Delete from "users" -> "userId" -> "places"-collection

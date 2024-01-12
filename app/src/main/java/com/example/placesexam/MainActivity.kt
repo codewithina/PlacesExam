@@ -17,9 +17,9 @@ class MainActivity : AppCompatActivity() {
             .add(R.id.fragmentHolder, MyPlacesFragment())
             .commit()
 
-       fab = findViewById(R.id.fab)
+        fab = findViewById(R.id.fab)
 
-        fab.setOnClickListener{
+        fab.setOnClickListener {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentHolder, AddNewSpotFragment())
             transaction.addToBackStack(null)
@@ -38,18 +38,21 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
+
                 R.id.myPlacesFragment -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentHolder, MyPlacesFragment())
                         .commit()
                     true
                 }
+
                 R.id.mapFragment -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentHolder, MapFragment())
                         .commit()
                     true
                 }
+
                 else -> false
             }
         }

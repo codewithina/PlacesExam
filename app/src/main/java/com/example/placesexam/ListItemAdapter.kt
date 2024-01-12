@@ -32,10 +32,10 @@ class ListItemAdapter(
 
             val description = currentPlace.description
             if (description != null) {
-                if(description.length > 33){
+                if (description.length > 33) {
                     val shortDescription = description.substring(0..32) + "..."
                     view.findViewById<TextView>(R.id.placeDescription).text = shortDescription
-                }else{
+                } else {
                     view.findViewById<TextView>(R.id.placeDescription).text = description
                 }
             }

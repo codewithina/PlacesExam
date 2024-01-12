@@ -52,7 +52,7 @@ class AllPlacesFragment : Fragment() {
 
         val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab)
         fab.setImageResource(R.drawable.baseline_add_24)
-        fab.setOnClickListener{
+        fab.setOnClickListener {
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentHolder, AddNewSpotFragment())
             transaction.addToBackStack(null)
@@ -78,7 +78,8 @@ class AllPlacesFragment : Fragment() {
                     val imageUrl = document.getString("imageUrl")
 
                     if (name != null && description != null && lat != null && lng != null && imageUrl != null) {
-                        val listItem = ListItem(userId, placeId, name, description, imageUrl, lat, lng)
+                        val listItem =
+                            ListItem(userId, placeId, name, description, imageUrl, lat, lng)
                         placeList.add(listItem)
                     }
                 }

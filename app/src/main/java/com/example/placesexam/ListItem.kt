@@ -2,7 +2,7 @@ package com.example.placesexam
 
 import java.io.Serializable
 
-class ListItem (
+class ListItem(
     val userId: String? = null,
     var placeId: String? = null,
     val name: String? = null,

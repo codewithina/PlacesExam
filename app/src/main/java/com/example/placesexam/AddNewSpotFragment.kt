@@ -1,4 +1,5 @@
 package com.example.placesexam
+
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -83,6 +84,7 @@ class AddNewSpotFragment : Fragment() {
             uploadImageToFirebaseStorage()
         }
     }
+
     override fun onPause() {
         super.onPause()
         val fab: FloatingActionButton = activity?.findViewById(R.id.fab) as FloatingActionButton
@@ -117,7 +119,8 @@ class AddNewSpotFragment : Fragment() {
                 }
             }
             .addOnFailureListener { e ->
-                Toast.makeText(context, "Error uploading image: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Error uploading image: ${e.message}", Toast.LENGTH_SHORT)
+                    .show()
             }
     }
 
@@ -127,7 +130,8 @@ class AddNewSpotFragment : Fragment() {
 
         val uniqueId = UUID.randomUUID().toString()
 
-        val newPlaceRefUser = db.collection("users").document(userId!!).collection("places").document(uniqueId)
+        val newPlaceRefUser =
+            db.collection("users").document(userId!!).collection("places").document(uniqueId)
         val newPlaceRefGeneral = db.collection("places").document(uniqueId)
 
         val placeData = hashMapOf(
