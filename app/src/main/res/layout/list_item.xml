@@ -27,6 +27,8 @@
         android:text="Soko soko"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="4dp"
+        android:maxLines="1"
+        android:autoSizeTextType="uniform"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
 
     <TextView

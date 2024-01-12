@@ -1,13 +1,17 @@
 package com.example.placesexam
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
@@ -59,6 +63,16 @@ class PlaceInfoFragment : Fragment() {
                     }
                 }
             }
+            val openInGoogleMaps = view.findViewById<Button>(R.id.googleMapsButton)
+            openInGoogleMaps.setOnClickListener {
+                val mapsIntentUri = Uri.parse("geo:0,0?q=${clickedItem?.lat},${clickedItem?.lng}")
+                val mapIntent = Intent(Intent.ACTION_VIEW, mapsIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                if (mapIntent.resolveActivity(requireActivity().packageManager) != null) {
+                    startActivity(mapIntent)
+                }
+            }
+
         }
 
     }
